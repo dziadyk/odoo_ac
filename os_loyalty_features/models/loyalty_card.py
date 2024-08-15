@@ -5,19 +5,35 @@ from datetime import datetime, timedelta
 class LoyaltyCard(models.Model):
     _inherit = 'loyalty.card'
 
+    season_ticket = fields.Boolean(
+        related='program_id.season_ticket',
+    )
+
     @api.model
     def default_get(self, fields):
         defaults = super(LoyaltyCard, self).default_get(fields)
-        defaults.update(
-            points=999,
-            expiration_date=datetime.now() + timedelta(days=365),
-        )
+
+        active_model = self.env.context.get('active_model')
+        if active_model == 'loyalty.program' and len(self.env.context.get('active_ids', [])) <= 1:
+            program = self.env[active_model].browse(self.env.context.get('active_id')).exists()
+            if program and program.season_ticket:
+                defaults.update(
+                    points=999,
+                    expiration_date=datetime.now() + timedelta(days=365),
+                )
 
         return defaults
 
     def write(self, vals):
-        if 'points' in vals:
-            if vals['points'] == 1:
-                vals['points'] = 999
+        for rec in self:
+            if rec.season_ticket:
+                vals.update(
+                    points=999,
+                )
+                if (not rec.expiration_date
+                        or ('expiration_date' in vals and not vals.get('expiration_date'))):
+                    vals.update(
+                        expiration_date=rec.create_date + timedelta(days=365),
+                    )
         res = super(LoyaltyCard, self).write(vals)
         return res
