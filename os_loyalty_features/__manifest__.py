@@ -10,15 +10,14 @@
 
     'category': 'Sales',
     'license': 'LGPL-3',
-    'version': '17.0.1.0.1',
+    'version': '17.0.1.0',
 
     'depends': [
         'loyalty',
     ],
 
     'data': [
-    #    'views/project_filter_views.xml',
-    #    'views/project_form_views.xml',
+        'views/loyalty_program_views.xml',
     ],
 
     'demo': [
