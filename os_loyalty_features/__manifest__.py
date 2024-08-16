@@ -5,8 +5,8 @@
     'description': 'Loyalty (OSC Features)',
 
     'author': 'Volodymyr Dziadyk',
-    'website': 'https://www.oneservice-consulting.com/',
-    'support': 'dvol@oneservice.in.ua',
+    'website': 'https://oneservice-consulting.com/',
+    'support': 'dvol@oneservice-consulting.com',
 
     'category': 'Sales',
     'license': 'LGPL-3',
