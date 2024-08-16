@@ -17,6 +17,7 @@
     ],
 
     'data': [
+        'views/res_partner_views.xml',
         'views/loyalty_program_views.xml',
     ],
 

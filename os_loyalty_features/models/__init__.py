@@ -1,1 +1,1 @@
-from . import loyalty_program, loyalty_card
+from . import res_partner, loyalty_program, loyalty_card
