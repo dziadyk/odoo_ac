@@ -19,6 +19,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: os_loyalty_features
+#: model:ir.model,name:os_loyalty_features.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: os_loyalty_features
+#: model:ir.model.fields,field_description:os_loyalty_features.field_res_partner__birthday
+#: model:ir.model.fields,field_description:os_loyalty_features.field_res_users__birthday
+msgid "Date of Birth"
+msgstr "Дата народження"
+
+#. module: os_loyalty_features
 #: model:ir.model,name:os_loyalty_features.model_loyalty_card
 msgid "Loyalty Coupon"
 msgstr "Купон на знижку"
