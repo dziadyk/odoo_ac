@@ -27,10 +27,11 @@ class LoyaltyCard(models.Model):
     @api.model_create_multi
     def create(self, vals):
         res = super(LoyaltyCard, self).create(vals)
-        if res.season_ticket:
-            res.points = 999
-        if res.season_ticket and not res.expiration_date:
-            res.expiration_date=datetime.now() + timedelta(days=365)
+        for rec in res:
+            if rec.season_ticket:
+                rec.points = 999
+            if rec.season_ticket and not rec.expiration_date:
+                rec.expiration_date=datetime.now() + timedelta(days=365)
         return res
 
     def write(self, vals):
