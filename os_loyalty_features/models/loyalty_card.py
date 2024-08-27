@@ -32,6 +32,10 @@ class LoyaltyCard(models.Model):
                 rec.points = 999
             if rec.season_ticket and not rec.expiration_date:
                 rec.expiration_date=datetime.now() + timedelta(days=365)
+            if rec.season_ticket and not rec.partner_id and rec.source_pos_order_id:
+                rec.partner_id = rec.source_pos_order_id.partner_id
+            if rec.season_ticket and not rec.partner_id and rec.order_id:
+                rec.partner_id = rec.order_id.partner_id
         return res
 
     def write(self, vals):
@@ -44,6 +48,14 @@ class LoyaltyCard(models.Model):
                         or ('expiration_date' in vals and not vals.get('expiration_date'))):
                     vals.update(
                         expiration_date=rec.create_date + timedelta(days=365),
+                    )
+                if not rec.partner_id and rec.source_pos_order_id:
+                    vals.update(
+                        partner_id=rec.source_pos_order_id.partner_id,
+                    )
+                if not rec.partner_id and rec.order_id:
+                    vals.update(
+                        partner_id=rec.order_id.partner_id,
                     )
         res = super(LoyaltyCard, self).write(vals)
         return res
