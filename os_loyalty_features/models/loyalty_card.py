@@ -56,6 +56,13 @@ class LoyaltyCard(models.Model):
                     vals.update(
                         expiration_date=rec.create_date + timedelta(days=rec.validity_period),
                     )
+                if (rec.points == 998 and
+                        (not rec.activation_date
+                         or ('activation_date' in vals and not vals.get('activation_date')))):
+                    vals.update(
+                        activation_date=datetime.today(),
+                        expiration_date=datetime.today() + timedelta(days=rec.validity_period),
+                    )
                 if not rec.partner_id and rec.source_pos_order_id:
                     vals.update(
                         partner_id=rec.source_pos_order_id.partner_id,
@@ -64,5 +71,6 @@ class LoyaltyCard(models.Model):
                     vals.update(
                         partner_id=rec.order_id.partner_id,
                     )
+
         res = super(LoyaltyCard, self).write(vals)
         return res

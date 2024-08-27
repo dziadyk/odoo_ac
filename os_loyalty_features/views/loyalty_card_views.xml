@@ -9,10 +9,13 @@
             <xpath expr="//field[@name='expiration_date']" position="before">
                 <field name="season_ticket"
                        string="Season Ticket"
-                       invisible="1"/>
+                       invisible="1"
+                />
                 <field name="activation_date"
                        string="Activation Date"
-                       invisible="season_ticket != True"/>
+                       invisible="season_ticket != True"
+                       readonly="1"
+                />
             </xpath>
         </field>
     </record>
