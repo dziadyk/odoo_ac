@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 class LoyaltyCard(models.Model):
     _inherit = 'loyalty.card'
 
+    activation_date = fields.Date()
+
     season_ticket = fields.Boolean(
         related='program_id.season_ticket',
     )
@@ -32,7 +34,7 @@ class LoyaltyCard(models.Model):
     def create(self, vals):
         res = super(LoyaltyCard, self).create(vals)
         for rec in res:
-            if rec.season_ticket:
+            if rec.season_ticket and rec.points < 100:
                 rec.points = 999
             if rec.season_ticket and not rec.expiration_date:
                 rec.expiration_date=datetime.now() + timedelta(days=rec.validity_period)
@@ -45,9 +47,10 @@ class LoyaltyCard(models.Model):
     def write(self, vals):
         for rec in self:
             if rec.season_ticket:
-                vals.update(
-                    points=999,
-                )
+                if rec.points < 100:
+                    vals.update(
+                        points=999,
+                    )
                 if (not rec.expiration_date
                         or ('expiration_date' in vals and not vals.get('expiration_date'))):
                     vals.update(

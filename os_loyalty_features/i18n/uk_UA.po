@@ -19,6 +19,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: os_loyalty_features
+#: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_card__activation_date
+#: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_card_view_form
+msgid "Activation Date"
+msgstr "Дата активації"
+
+#. module: os_loyalty_features
 #: model:ir.model,name:os_loyalty_features.model_res_partner
 msgid "Contact"
 msgstr "Контакт"
@@ -40,13 +46,20 @@ msgid "Loyalty Program"
 msgstr "Програма лояльності"
 
 #. module: os_loyalty_features
+#: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_card__season_ticket
 #: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_program__season_ticket
+#: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_card_view_form
 #: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_program_view_form
 msgid "Season Ticket"
 msgstr "Абонемент"
 
 #. module: os_loyalty_features
+#: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_card__validity_period
 #: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_program__validity_period
+msgid "Validity Period"
+msgstr "Термін дії"
+
+#. module: os_loyalty_features
 #: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_program_view_form
 msgid "Validity Period (days)"
 msgstr "Термін дії (дні)"
