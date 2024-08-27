@@ -48,7 +48,8 @@ class LoyaltyCard(models.Model):
     def write(self, vals):
         for rec in self:
             if rec.season_ticket:
-                if rec.points < 100:
+                if (rec.points < 100
+                        or ('points' in vals and (vals.get('points') > 999 or vals.get('points') < 100))):
                     vals.update(
                         points=999,
                     )
@@ -57,7 +58,7 @@ class LoyaltyCard(models.Model):
                     vals.update(
                         expiration_date=rec.create_date + timedelta(days=rec.validity_period),
                     )
-                if ((rec.points < 999 or ('points' in vals and vals.get('points') < 999))
+                if ((rec.points == 998 or ('points' in vals and vals.get('points') == 998))
                         and (not rec.activation_date or ('activation_date' in vals and not vals.get('activation_date')))):
                     vals.update(
                         activation_date=datetime.today(),
