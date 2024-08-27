@@ -9,6 +9,10 @@ class LoyaltyCard(models.Model):
         related='program_id.season_ticket',
     )
 
+    validity_period = fields.Integer(
+        related='program_id.validity_period',
+    )
+
     @api.model
     def default_get(self, fields):
         defaults = super(LoyaltyCard, self).default_get(fields)
@@ -19,7 +23,7 @@ class LoyaltyCard(models.Model):
             if program and program.season_ticket:
                 defaults.update(
                     points=999,
-                    expiration_date=datetime.now() + timedelta(days=365),
+                    expiration_date=datetime.now() + timedelta(days=program.validity_period),
                 )
 
         return defaults
@@ -31,7 +35,7 @@ class LoyaltyCard(models.Model):
             if rec.season_ticket:
                 rec.points = 999
             if rec.season_ticket and not rec.expiration_date:
-                rec.expiration_date=datetime.now() + timedelta(days=365)
+                rec.expiration_date=datetime.now() + timedelta(days=rec.validity_period)
             if rec.season_ticket and not rec.partner_id and rec.source_pos_order_id:
                 rec.partner_id = rec.source_pos_order_id.partner_id
             if rec.season_ticket and not rec.partner_id and rec.order_id:
@@ -47,7 +51,7 @@ class LoyaltyCard(models.Model):
                 if (not rec.expiration_date
                         or ('expiration_date' in vals and not vals.get('expiration_date'))):
                     vals.update(
-                        expiration_date=rec.create_date + timedelta(days=365),
+                        expiration_date=rec.create_date + timedelta(days=rec.validity_period),
                     )
                 if not rec.partner_id and rec.source_pos_order_id:
                     vals.update(

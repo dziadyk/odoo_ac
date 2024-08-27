@@ -10,6 +10,9 @@
                 <field name="season_ticket"
                        string="Season Ticket"
                        invisible="program_type != 'next_order_coupons'"/>
+                <field name="validity_period"
+                       string="Validity Period (days)"
+                       invisible="season_ticket != True"/>
             </xpath>
         </field>
     </record>

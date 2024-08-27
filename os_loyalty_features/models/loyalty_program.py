@@ -7,3 +7,7 @@ class LoyaltyProgram(models.Model):
     season_ticket = fields.Boolean(
         default=False,
     )
+
+    validity_period = fields.Integer(
+        default=0,
+    )

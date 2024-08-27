@@ -44,3 +44,9 @@ msgstr "Програма лояльності"
 #: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_program_view_form
 msgid "Season Ticket"
 msgstr "Абонемент"
+
+#. module: os_loyalty_features
+#: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_program__validity_period
+#: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_program_view_form
+msgid "Validity Period (days)"
+msgstr "Термін дії (дні)"
