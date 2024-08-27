@@ -34,14 +34,15 @@ class LoyaltyCard(models.Model):
     def create(self, vals):
         res = super(LoyaltyCard, self).create(vals)
         for rec in res:
-            if rec.season_ticket and rec.points < 100:
-                rec.points = 999
-            if rec.season_ticket and not rec.expiration_date:
-                rec.expiration_date=datetime.now() + timedelta(days=rec.validity_period)
-            if rec.season_ticket and not rec.partner_id and rec.source_pos_order_id:
-                rec.partner_id = rec.source_pos_order_id.partner_id
-            if rec.season_ticket and not rec.partner_id and rec.order_id:
-                rec.partner_id = rec.order_id.partner_id
+            if rec.season_ticket:
+                #if rec.points < 100:
+                #    rec.points = 999
+                if not rec.expiration_date:
+                    rec.expiration_date = datetime.now() + timedelta(days=rec.validity_period)
+                if not rec.partner_id and rec.source_pos_order_id:
+                    rec.partner_id = rec.source_pos_order_id.partner_id
+                if not rec.partner_id and rec.order_id:
+                    rec.partner_id = rec.order_id.partner_id
         return res
 
     def write(self, vals):
@@ -56,7 +57,7 @@ class LoyaltyCard(models.Model):
                     vals.update(
                         expiration_date=rec.create_date + timedelta(days=rec.validity_period),
                     )
-                if ((rec.points == 998 or ('points' in vals and vals.get('points') == 998))
+                if ((rec.points < 999 or ('points' in vals and vals.get('points') < 999))
                         and (not rec.activation_date or ('activation_date' in vals and not vals.get('activation_date')))):
                     vals.update(
                         activation_date=datetime.today(),
