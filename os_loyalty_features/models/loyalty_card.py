@@ -56,9 +56,8 @@ class LoyaltyCard(models.Model):
                     vals.update(
                         expiration_date=rec.create_date + timedelta(days=rec.validity_period),
                     )
-                if (rec.points == 998 and
-                        (not rec.activation_date
-                         or ('activation_date' in vals and not vals.get('activation_date')))):
+                if ((rec.points == 998 or ('points' in vals and vals.get('points') == 998))
+                        and (not rec.activation_date or ('activation_date' in vals and not vals.get('activation_date')))):
                     vals.update(
                         activation_date=datetime.today(),
                         expiration_date=datetime.today() + timedelta(days=rec.validity_period),

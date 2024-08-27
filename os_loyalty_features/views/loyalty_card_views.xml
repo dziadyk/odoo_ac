@@ -9,13 +9,22 @@
             <xpath expr="//field[@name='expiration_date']" position="before">
                 <field name="season_ticket"
                        string="Season Ticket"
-                       invisible="1"
-                />
+                       invisible="1"/>
                 <field name="activation_date"
                        string="Activation Date"
-                       invisible="season_ticket != True"
-                       readonly="1"
-                />
+                       invisible="season_ticket != True"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="os_loyalty_card_view_tree" model="ir.ui.view">
+        <field name="name">os.loyalty.card.view.tree</field>
+        <field name="model">loyalty.card</field>
+        <field name="inherit_id" ref="loyalty.loyalty_card_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expiration_date']" position="before">
+                <field name="activation_date"
+                       string="Activation Date"/>
             </xpath>
         </field>
     </record>

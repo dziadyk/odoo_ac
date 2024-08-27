@@ -21,6 +21,7 @@ msgstr ""
 #. module: os_loyalty_features
 #: model:ir.model.fields,field_description:os_loyalty_features.field_loyalty_card__activation_date
 #: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_card_view_form
+#: model_terms:ir.ui.view,arch_db:os_loyalty_features.os_loyalty_card_view_tree
 msgid "Activation Date"
 msgstr "Дата активації"
 
