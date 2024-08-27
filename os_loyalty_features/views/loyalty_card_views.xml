@@ -12,7 +12,8 @@
                        invisible="1"/>
                 <field name="activation_date"
                        string="Activation Date"
-                       invisible="season_ticket != True"/>
+                       invisible="season_ticket != True"
+                       readonly="1"/>
             </xpath>
         </field>
     </record>
